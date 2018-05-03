@@ -6,33 +6,45 @@
 #define FALSE 0
 #define TRUE 1
 
-
-typedef int Elem;
+#define LIST_INIT_SIZE 100
+#define LISTINCREMENT 10
 typedef int Status;
-typedef Elem *List;
+typedef int Elem;
 
-Status InitList(List *L)
+typedef struct{
+    Elem *elem;
+    int length;
+    int listsize;
+}SqList;
+
+Status InitList(SqList *L)
 {
-    *L = (List)malloc(sizeof(Elem));
-    if(!(*L))
+    L->elem = (Elem *) malloc (LIST_INIT_SIZE * sizeof(Elem)); 
+    if(!L->elem)
         return ERROR;
+    L->length = 0;
+    L->listsize = LIST_INIT_SIZE;
     return OK;
 }
 
-Status DestroyList(List *L)
+Status DestroyList(SqList *L)
 {
-    free(*L);
-    *L = NULL;
-    if(*L)
+    free(L->elem);
+    L->elem = NULL;
+    if(L->elem)
         return ERROR;
     return OK;
 }
-
 void main()
 {
-    List L;
+    SqList L;
     if(InitList(&L))
         printf("InitList success\n");
     else
-        printf("InitList fail");
+        printf("InitList fail\n");
+    if(DestroyList(&L))
+        printf("Destroy List success\n");
+    else
+        printf("Destroy List fail\n");
+
 }
