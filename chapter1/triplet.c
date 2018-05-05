@@ -71,9 +71,9 @@ int Min(Triplet T)
 
 int main(void)
 {
-	Triplet t;
-	InitTriplet(&t, 1, 2, 3);
-	printf("%d%d%d\n", t[0], t[1], t[2]);
+    Triplet t;
+    InitTriplet(&t, 1, 2, 3);
+    printf("%d%d%d\n", t[0], t[1], t[2]);
     printf("%d\n",IsAscending(t));
     printf("%d\n",IsDescending(t));
     printf("%d\n",Max(t));
