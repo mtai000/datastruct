@@ -35,7 +35,7 @@ Status DestroyList(SqList *L)
         return ERROR;
     return OK;
 }
-void main()
+int main(void)
 {
     SqList L;
     if(InitList(&L))
@@ -47,4 +47,5 @@ void main()
     else
         printf("Destroy List fail\n");
 
+    return 0;
 }

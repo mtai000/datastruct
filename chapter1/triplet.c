@@ -69,7 +69,7 @@ int Min(Triplet T)
     return temp>T[2]?T[2]:temp;
 }
 
-void main()
+int main(void)
 {
 	Triplet t;
 	InitTriplet(&t, 1, 2, 3);
@@ -78,6 +78,7 @@ void main()
     printf("%d\n",IsDescending(t));
     printf("%d\n",Max(t));
     printf("%d\n",Min(t));
+    return 0;
 }
 
 
