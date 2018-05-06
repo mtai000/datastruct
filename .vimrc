@@ -1,4 +1,3 @@
-colorscheme evening
 syntax on
 filetype on
 
