@@ -9,18 +9,18 @@ typedef Elem *Triplet;
 
 Status InitTriplet(Triplet *T, Elem v0, Elem v1, Elem v2)
 {
-	*T = (Elem *)malloc(3 * sizeof(Elem));
-	(*T)[0] = v0;
-	(*T)[1] = v1;
-	(*T)[2] = v2;
-	return OK;
+    *T = (Elem *)malloc(3 * sizeof(Elem));
+    (*T)[0] = v0;
+    (*T)[1] = v1;
+    (*T)[2] = v2;
+    return OK;
 }
 
 Status DestroyTriplet(Triplet *T)
 {
-	free(*T);
-	*T = NULL;
-	return OK;
+    free(*T);
+    *T = NULL;
+    return OK;
 }
 
 Status Get(Triplet T,int i,Elem *e)
@@ -69,15 +69,17 @@ int Min(Triplet T)
     return temp>T[2]?T[2]:temp;
 }
 
-void main()
+int main(void)
 {
-	Triplet t;
-	InitTriplet(&t, 1, 2, 3);
-	printf("%d%d%d\n", t[0], t[1], t[2]);
+    Triplet t;
+    InitTriplet(&t, 1, 2, 3);
+    printf("%d%d%d\n", t[0], t[1], t[2]);
     printf("%d\n",IsAscending(t));
     printf("%d\n",IsDescending(t));
     printf("%d\n",Max(t));
     printf("%d\n",Min(t));
+    return 0;
 }
+
 
 
