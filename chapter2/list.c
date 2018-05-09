@@ -85,6 +85,26 @@ Status ListInsert(SqList *L , int i, int e)
       
     return OK;
 }
+Status ListDelete(SqList *L , int i, int *e)
+{
+    if(i < 1 || i > ListLength(*L)+1)
+    {
+        printf("Insert invalid value : i = %d\n", i);
+        return ERROR;
+    }
+
+    int *p = &(L->elem[i - 1]);
+    *e = *p;
+    int *q;
+    q = L->elem + (L->length -1)*sizeof(Elem);
+    for( p+= sizeof(Elem) ; p <= q; p += sizeof(Elem)) 
+        *p = *(p+sizeof(Elem));
+    
+    -- (L->length);
+      
+    return OK;
+}
+
 
 int LocateElem(SqList L,int e, Status (*compare)(Elem ,Elem))
 {
@@ -105,7 +125,7 @@ Status PriorElem(SqList L,Elem cur_e, Elem* pre_e)
 {
     int i = 0;
    
-    while( i <= L.length)
+    while( i < L.length)
     {
         if( L.elem[i] == cur_e && i != 0)
         {     
@@ -117,6 +137,24 @@ Status PriorElem(SqList L,Elem cur_e, Elem* pre_e)
 
     return  ERROR;
 }
+
+Status NextElem(SqList L,Elem cur_e, Elem* next_e)
+{
+    int i = 0;
+   
+    while( i < L.length)
+    {
+        if( L.elem[i] == cur_e && i != L.length -1)
+        {     
+            *next_e=L.elem[i+1];
+            return OK;
+        }
+        i++;
+    }
+
+    return  ERROR;
+}
+
 
 
 int main(void)
@@ -143,10 +181,19 @@ int main(void)
     ListInsert(&L,2,1);
     ListInsert(&L,1,6);
     int e = 0;
+    
     GetElem(L,2,&e);
     printf("%d\n",e);
+
     PriorElem(L,3,&e);
     printf("%d\n",e);
+   
+    NextElem(L,3,&e);
+    printf("%d\n",e);
+
+    ListDelete(&L,1,&e);
+    printf("%d\n",e);
+    
     DestroyList(&L); 
     return 0;
 }
