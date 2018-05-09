@@ -86,6 +86,39 @@ Status ListInsert(SqList *L , int i, int e)
     return OK;
 }
 
+int LocateElem(SqList L,int e, Status (*compare)(Elem ,Elem))
+{
+    int i;
+    Elem *p;
+    i = 1;
+    p=L.elem;
+
+    while (i <= L.length && !(*compare)(*p++,e) )
+    {
+        ++i;
+    }
+    if( i <= L.length) return i;
+    else return ERROR;
+}
+
+Status PriorElem(SqList L,Elem cur_e, Elem* pre_e)
+{
+    int i = 0;
+   
+    while( i <= L.length)
+    {
+        if( L.elem[i] == cur_e && i != 0)
+        {     
+            *pre_e=L.elem[i-1];
+            return OK;
+        }
+        i++;
+    }
+
+    return  ERROR;
+}
+
+
 int main(void)
 {
     SqList L;
@@ -112,7 +145,9 @@ int main(void)
     int e = 0;
     GetElem(L,2,&e);
     printf("%d\n",e);
-    DestroyList(&L);
+    PriorElem(L,3,&e);
+    printf("%d\n",e);
+    DestroyList(&L); 
     return 0;
 }
 
