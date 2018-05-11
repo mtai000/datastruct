@@ -61,13 +61,54 @@ Status GetElem_L(LinkList *L,int i ,Elem *e)
     return OK;
 }
 
+Status ListInsert_L(LinkList *L,int i,Elem e)
+{
+    LNode *p = (*L)->next;
+    int j = 0;
+    while(j<i && p)
+    {
+        p = p->next;
+        j++;
+    }
+    if(!p || j > i-1) return ERROR;
+    LNode *node = (LinkList)malloc(sizeof(LNode));
+    node->data = e;
+    node->next = p->next;
+    p->next = node;
+    return OK;
+}
+
+Status ListDelete_L(LinkList *L,int i, Elem *e)
+{
+    LinkList p = *L;
+    int j = 0;
+    for(; p&& j<i-1; ++j)
+    {
+        p=p->next;
+    }
+    if(!(p->next) || j>i-1) return ERROR;
+    LNode *q = p->next;
+    *e = q->data;
+    p->next = q->next;
+    free(q);
+    return OK;
+}
+
+
 int main(void)
 {
     LinkList L;
     CreateList_L(&L,5);
-    int e;
+    int e=6;
+    ListInsert_L(&L,5,e);
     GetElem_L(&L,4,&e);
-    printf("e value is : %d\n",e);
+    ListDelete_L(&L,5,&e);
+    while(L->next)
+    {
+        L = L->next;
+        printf("%d,",L->data);
+    }
+    printf("\n");
     //if(InitList(&L))
     //    printf("InitList success\n");
     //else
