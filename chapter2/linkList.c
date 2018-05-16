@@ -94,19 +94,36 @@ Status ListDelete_L(LinkList *L,int i, Elem *e)
     return OK;
 }
 
+Status MergeList(LinkList *La , LinkList *Lb,LinkList *Lc)
+{
+    LinkList p_a = (*La)->next;
+    LinkList p_b = (*Lb)->next;
+    LinkList p_c = (*Lc)->next;
+    (*Lc)->next = p_a;
+    while(p_a->next)
+    {
+        p_a = p_a->next;
+    }
+    p_a->next = p_b;
+    return OK;
+}
+
 
 int main(void)
 {
-    LinkList L;
+    LinkList L,L2,L3,L4;
+
     CreateList_L(&L,5);
     int e=6;
-    ListInsert_L(&L,5,e);
-    GetElem_L(&L,4,&e);
     ListDelete_L(&L,5,&e);
-    while(L->next)
+    CreateList_L(&L2,3);
+    CreateList_L(&L3,4);
+    CreateList_L(&L4,0);
+    MergeList(&L2,&L3,&L4);
+    while(L4->next)
     {
-        L = L->next;
-        printf("%d,",L->data);
+        L4 = L4->next;
+        printf("%d,",L4->data);
     }
     printf("\n");
     //if(InitList(&L))
@@ -146,4 +163,6 @@ int main(void)
     //DestroyList(&L); 
     return 0;
 }
+
+
 
