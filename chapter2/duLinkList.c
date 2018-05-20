@@ -22,18 +22,50 @@ typedef struct{
     int len;
 }DuLinkList;
 
-Status CreatDuList(DuLinkList *L, int len)
+Status CreateDuList(DuLinkList *L, int len)
 {
-    
+    L->len = len;
+
+    if (len == 0)
+    {
+        return OK;
+    }
+    Position pos = L->head;
+    for (int i = 1; i <= L->len; i++)
+    {
+        DuLNode *p = (Link)malloc(sizeof(DuLNode));
+        if (i == 1)
+        {
+            L->head = p;
+            L->tail = p;
+            printf("Input %d value:", i);
+            scanf("%d", &(p->data));
+            p->next = p;
+            p->prior = p;
+        }
+        else
+        {
+            p->prior = pos;
+            pos->next = p;
+            L->tail = p;
+            p->next = L->head;
+            L->head->prior = p;
+            printf("Input %d value:", i);
+            scanf("%d", &(p->data));
+        }
+        pos = p;
+    }
+
     return OK;
 }
+
 
 
 int main(void)
 {
     DuLinkList L/*,L2,L3,L4*/;
 
-    CreateList_L(&L,5);
+    CreateDuList(&L,5);
     //int e=6;
     //ListDelete_L(&L,5,&e);
     //CreateList_L(&L2,3);
