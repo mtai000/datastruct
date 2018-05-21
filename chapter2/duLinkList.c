@@ -25,7 +25,7 @@ typedef struct{
 Status CreateDuList(DuLinkList *L, int len)
 {
     L->len = len;
-
+    
     if (len == 0)
     {
         return OK;
@@ -72,12 +72,13 @@ int main(void)
     //CreateList_L(&L3,4);
     //CreateList_L(&L4,0);
     //MergeList(&L2,&L3,&L4);
-    //while(L4->next)
-    //{
-    //    L4 = L4->next;
-    //    printf("%d,",L4->data);
-    //}
-    //printf("\n");
+    Position p = L.head;
+    for(int i =0; i<L.len;i++)
+    {
+        printf("%d,",p->data);
+        p = p->next;
+    }
+    printf("\n");
     //if(InitList(&L))
     //    printf("InitList success\n");
     //else
