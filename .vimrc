@@ -1,3 +1,9 @@
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'ianding1/leetcode.vim'
+call plug#end()
+
 syntax on
 filetype on
 
